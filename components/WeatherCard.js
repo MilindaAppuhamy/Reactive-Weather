@@ -5,6 +5,7 @@ import partlyCloudy from "../assets/PartlyCloudy.svg";
 import cloudy from "../assets/Cloudy.svg";
 
 function WeatherCard(props) {
+  console.log(props.data);
   let image;
   if (props.data.forecast === "Sunny") {
     image = sunny;
@@ -27,9 +28,9 @@ function WeatherCard(props) {
         />
       </div>
       <div class="card-body">
-        <h3 className="card-title">{props.data.city}</h3>
-        <h5 className="card-text">{props.data.temperature}</h5>
-        <h5 className="card-text">{props.data.forecast}</h5>
+        <h3 className="card-title">The weather in {props.data.city} is,</h3>
+        <h5 className="card-text">{props.data.temperature} C</h5>
+        <h5 className="card-text">{props.data.forecast} day</h5>
       </div>
     </div>
   );

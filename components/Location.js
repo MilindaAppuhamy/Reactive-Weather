@@ -2,9 +2,10 @@ import sunny from "../assets/Sunny.svg";
 import rainy from "../assets/Rainy.svg";
 import partlyCloudy from "../assets/PartlyCloudy.svg";
 import cloudy from "../assets/Cloudy.svg";
+import WeatherCard from "./WeatherCard";
 
 export default function Location(props) {
-  const { data, location, setLoaction } = props;
+  const { data, location } = props;
 
   const city = data.find((elem) => elem.city === location);
 
@@ -19,21 +20,5 @@ export default function Location(props) {
     image = cloudy;
   }
 
-  return (
-    <div className="card">
-      <div className="img-container">
-        <img
-          className="card-img-top"
-          src={image}
-          alt="Card image cap"
-          id="icon"
-        />
-      </div>
-      <div class="card-body">
-        <h3 className="card-title">The weather in {city.city} is,</h3>
-        <h5 className="card-text">{city.temperature} C</h5>
-        <h5 className="card-text">{city.forecast} day</h5>
-      </div>
-    </div>
-  );
+  return city ? <WeatherCard data={city} /> : <div>Location not found</div>;
 }
