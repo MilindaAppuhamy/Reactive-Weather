@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import cities from "./data";
 import Location from "./components/Location";
 import Form from "./components/Form";
 
@@ -13,7 +12,7 @@ function App() {
       <div className="app">
         <div style={{ display: "flex", flexDirection: "column" }}>
           <Form setLocation={setLocation} />
-          <Location data={cities} location={location} />
+          <Location location={location} />
         </div>
       </div>
     </>

@@ -3,22 +3,24 @@ import rainy from "../assets/Rainy.svg";
 import partlyCloudy from "../assets/PartlyCloudy.svg";
 import cloudy from "../assets/Cloudy.svg";
 import WeatherCard from "./WeatherCard";
+import "dotenv/config";
+import { useEffect, useState } from "react";
 
 export default function Location(props) {
-  const { data, location } = props;
+  const { location } = props;
+  const [city, setCity] = useState({});
 
-  const city = data.find((elem) => elem.city === location);
-
-  let image;
-  if (props.data.forecast === "Sunny") {
-    image = sunny;
-  } else if (props.data.forecast === "Rainy") {
-    image = rainy;
-  } else if (props.data.forecast === "Partly cloudy") {
-    image = partlyCloudy;
-  } else {
-    image = cloudy;
+  async function getWeather() {
+    const res = await fetch(
+      `http://api.weatherapi.com/v1/current.json?key=${process.env.API_KEY}&q=${location}&aqi=no`
+    );
+    const data = await res.json();
+    setCity(data);
   }
+
+  useEffect(() => {
+    getWeather();
+  }, [location]);
 
   return city ? <WeatherCard data={city} /> : <div>Location not found</div>;
 }
